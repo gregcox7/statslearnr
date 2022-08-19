@@ -1,0 +1,5 @@
+install.packages("tidyverse")
+install.packages("infer")
+install.packages("shiny")
+install.packages("learnr")
+remotes::install_github("rstudio/gradethis")

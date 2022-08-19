@@ -1,0 +1,81 @@
+---
+title: "Exploring Data with R"
+output:
+    learnr::tutorial:
+        progressive: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(learnr)
+library(gradethis)
+# knitr::opts_chunk$set(echo = FALSE)
+tutorial_options(exercise.checker = gradethis::grade_learnr)
+```
+
+In this session, we will learn a bit about data and how to explore it using the statistical computing language called "R".  The point is to learn a bit more about data and variables and to get a feel for the power of the tools we will be learning to use in the rest of the semester.
+
+Another point of today's activity is to illustrate how even though statistics is about dealing with data, those data are *meaningful*.  They are not just numbers or names, they are a peek into the world.  They offer glimpses of someone's life, of the workings of some natural process, of some social structure, etc.  Any dataset will be limited in how wide of a glimpse it gives us.  The point of statistics is to help us learn and make decisions based on that glimpse.
+
+## Chunks of code
+
+As you follow along in this activity, you will be asked to run bits of code written in the "R" language.  Code will appear in special boxes like the one below.  The box below is code that tells R to add the numbers 2 and 3.  Click the "Run Code" button to see the result.
+
+```{r simple_addition, exercise = TRUE, exercise.lines = 1}
+2 + 3
+```
+
+Notice that there's a mysterious "1" between two brackets in front of our answer.  Why is that?  It's because R is telling us there is just one part of our answer.  This may seem pedantic, but it is just R trying to help by giving us more information than we really need at the moment.
+
+Now give it a try yourself.  Tell R to add 5 and 7.
+
+```{r addition_ex, exercise = TRUE, exercise.lines = 1}
+
+```
+
+```{r addition_ex-solution}
+# 5_and_7 ----
+5 + 7
+
+# 7 and 5 ----
+7 + 5
+```
+
+```{r addition_ex-check}
+grade_this_code()
+```
+
+## A bit about R
+
+All of our labs will make use of the statistical computing language R.  The R language represents the current state of the art for statistical computing in both academic and industrial research.  It is likely to remain relevant for many years to come because it is free and open-source, meaning both that it is widely accessible and that improvements and extensions are being made continuously by a large community of professionals and hobbyists.  In fact, many of the best features of R that we will be using are extensions made by people outside the "core" development team for R.  These extensions are called "packages", and they represent bundles of code that are useful for doing statistics.
+
+<!-- ## Required packages -->
+
+<!-- Let's load one of those packages now.  Run the line of code in the box below to load a package called "tidyverse" from R's library. -->
+
+<!-- ```{r load_tidyverse, exercise = TRUE, exercise.lines = 1} -->
+<!-- library(tidyverse) -->
+<!-- ``` -->
+
+<!-- ```{r include = FALSE} -->
+<!-- library(tidyverse) -->
+<!-- ``` -->
+
+<!-- The messages that R just spat out tell us that R has loaded some helpful "packages" from its "library" that we will use.  You may notice some messages about "conflicts", but these are nothing we need to worry about.  As you'll come to see, R often gives us more information than we really need, but it is usually trying to be helpful. -->
+
+## Meet your data
+
+The data we will be looking at are passenger records from the RMS *Titanic*, an oceanliner which famously sank on April 15, 1912.  Though the liner was not filled to capacity, lax safety precautions---including a failure to carry enough lifeboats---meant that many of her passengers died because they were unable to evacuate when the ship struck an iceberg.
+
+### Load the data
+
+Run the following line of code at the console to load our data into your RStudio "environment":
+
+```{r load_data, exercise = TRUE, exercise.lines = 1}
+titanic <- read_csv("https://raw.githubusercontent.com/gregcox7/StatLabs/main/data/titanic.csv")
+```
+
+```{r include = FALSE}
+titanic <- read_csv("https://raw.githubusercontent.com/gregcox7/StatLabs/main/data/titanic.csv")
+```
