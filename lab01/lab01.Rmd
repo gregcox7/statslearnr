@@ -11,6 +11,7 @@ runtime: shiny_prerendered
 library(tidyverse)
 library(learnr)
 library(gradethis)
+
 # knitr::opts_chunk$set(echo = FALSE)
 tutorial_options(exercise.checker = gradethis::grade_learnr)
 gradethis_setup(
@@ -170,7 +171,7 @@ Explain in your own words why this chunk of code didn't work.
 
 ---
 
-### Proportions {#titanic-props}
+### Calculating proportions {#titanic-props}
 
 You may have heard that, when trying to evacuate the *Titanic*, there was a rule to put "women and children first" onto lifeboats.  This suggests a **hypothesis**, assuming this rule was actually followed: female passengers should have survived more often than male passengers.
 
@@ -189,8 +190,6 @@ We find proportions by taking a count and dividing by a sum of counts.  Specific
 $$
 \text{Proportion of A that are B} = \frac{\text{Number of A that are B}}{\text{Total number of A's}}
 $$
-
-#### R is a fancy calculator
 
 Let's use the numbers in the frequency table above to find the proportion of male passengers who survived and the proportion of female passengers who survived.  This will illustrate how, although R is quite powerful, it is in many ways just a fancy calculator.  But a calculator is still handy!
 
@@ -222,7 +221,7 @@ Compare the proportion of survivors among male and female passengers---are these
 
 ---
 
-#### Another way to get proportions
+### Proportions: R does the work
 
 One thing you will notice with R is that there are many ways to do the same thing.  Instead of calculating proportions by hand, we can add a line to the code we used to make the frequency table before to get R to give us the proportions of female and male passengers who did and did not survive:
 
@@ -253,7 +252,7 @@ titanic %>%
 
 # survived then class ----
 titanic %>%
-  group_by(class, survived) %>%
+  group_by(survived, class) %>%
   summarize(n = n()) %>%
   mutate(p = n / sum(n))
 ```
