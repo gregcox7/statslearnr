@@ -603,6 +603,7 @@ by putting them in “bins”, the width of which we need to decide.
 library(tidyverse)
 library(learnr)
 library(gradethis)
+
 # knitr::opts_chunk$set(echo = FALSE)
 tutorial_options(exercise.checker = gradethis::grade_learnr)
 gradethis_setup(
@@ -641,7 +642,7 @@ output$`tutorial-exercise-simple_addition-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "simple_addition", global_setup = structure(c("library(tidyverse)", 
-"library(learnr)", "library(gradethis)", "# knitr::opts_chunk$set(echo = FALSE)", 
+"library(learnr)", "library(gradethis)", "", "# knitr::opts_chunk$set(echo = FALSE)", 
 "tutorial_options(exercise.checker = gradethis::grade_learnr)", 
 "gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
 "titanic <- read_csv(\"data/titanic.csv\")"), chunk_opts = list(
@@ -684,7 +685,7 @@ output$`tutorial-exercise-addition_ex-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "addition_ex", global_setup = structure(c("library(tidyverse)", 
-"library(learnr)", "library(gradethis)", "# knitr::opts_chunk$set(echo = FALSE)", 
+"library(learnr)", "library(gradethis)", "", "# knitr::opts_chunk$set(echo = FALSE)", 
 "tutorial_options(exercise.checker = gradethis::grade_learnr)", 
 "gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
 "titanic <- read_csv(\"data/titanic.csv\")"), chunk_opts = list(
@@ -729,7 +730,7 @@ output$`tutorial-exercise-male_survivors-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "male_survivors", global_setup = structure(c("library(tidyverse)", 
-"library(learnr)", "library(gradethis)", "# knitr::opts_chunk$set(echo = FALSE)", 
+"library(learnr)", "library(gradethis)", "", "# knitr::opts_chunk$set(echo = FALSE)", 
 "tutorial_options(exercise.checker = gradethis::grade_learnr)", 
 "gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
 "titanic <- read_csv(\"data/titanic.csv\")"), chunk_opts = list(
@@ -774,7 +775,7 @@ output$`tutorial-exercise-class_survivors-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "class_survivors", global_setup = structure(c("library(tidyverse)", 
-"library(learnr)", "library(gradethis)", "# knitr::opts_chunk$set(echo = FALSE)", 
+"library(learnr)", "library(gradethis)", "", "# knitr::opts_chunk$set(echo = FALSE)", 
 "tutorial_options(exercise.checker = gradethis::grade_learnr)", 
 "gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
 "titanic <- read_csv(\"data/titanic.csv\")"), chunk_opts = list(
@@ -825,7 +826,7 @@ output$`tutorial-exercise-resid_survivor-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "resid_survivor", global_setup = structure(c("library(tidyverse)", 
-"library(learnr)", "library(gradethis)", "# knitr::opts_chunk$set(echo = FALSE)", 
+"library(learnr)", "library(gradethis)", "", "# knitr::opts_chunk$set(echo = FALSE)", 
 "tutorial_options(exercise.checker = gradethis::grade_learnr)", 
 "gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
 "titanic <- read_csv(\"data/titanic.csv\")"), chunk_opts = list(
