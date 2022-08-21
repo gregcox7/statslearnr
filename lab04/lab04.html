@@ -234,7 +234,7 @@ examine the distribution of lexical decision times.</p>
 <p>Fill in the blanks in the code below to make a histogram of lexical
 decision times across all words, using a binwidth of 20
 milliseconds.</p>
-<div class="tutorial-exercise" data-label="ldt_hist" data-completion="1"
+<div class="tutorial-exercise" data-label="ldt_hist" data-completion="0"
 data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>___ %&gt;%
   ggplot(aes(x = ___)) +
@@ -352,7 +352,7 @@ response variable (on the <code>y</code> axis) and
 <code>Age_Of_Acquisition</code> as the explanatory variable (on the
 <code>x</code> axis):</p>
 <div class="tutorial-exercise" data-label="ldt_aoa_scatter"
-data-completion="1" data-diagnostics="1" data-startover="1"
+data-completion="0" data-diagnostics="1" data-startover="1"
 data-lines="0">
 <pre class="text"><code>___ %&gt;%
   ggplot(aes(x = ___, y = ___)) +
@@ -373,7 +373,7 @@ response variable (on the <code>y</code> axis) and
 <code>Age_Of_Acquisition</code> as the explanatory variable (on the
 <code>x</code> axis) with the best-fitting line overlaid on top.</p>
 <div class="tutorial-exercise" data-label="aoa_lm_plot"
-data-completion="1" data-diagnostics="1" data-startover="1"
+data-completion="0" data-diagnostics="1" data-startover="1"
 data-lines="0">
 <pre class="text"><code>___ %&gt;%
   ggplot(aes(x = ___, y = ___)) +
@@ -394,7 +394,7 @@ used in the previous section as a guide):</p>
 <p>Fill in the blanks below to find the correlation between
 <code>LDT</code> and <code>Age_Of_Acquisition</code>:</p>
 <div class="tutorial-exercise" data-label="aoa_ldt_cor"
-data-completion="1" data-diagnostics="1" data-startover="1"
+data-completion="0" data-diagnostics="1" data-startover="1"
 data-lines="0">
 <pre class="text"><code>___ %&gt;%
     summarize(r = cor(___, ___))</code></pre>
@@ -421,7 +421,7 @@ regression line between Age of Acquisition and LDT:</p>
 of the line using Age of Acquisition as the explanatory variable and LDT
 as the response variable:</p>
 <div class="tutorial-exercise" data-label="aoa_ldt_lm"
-data-completion="1" data-diagnostics="1" data-startover="1"
+data-completion="0" data-diagnostics="1" data-startover="1"
 data-lines="0">
 <pre class="text"><code>lm(___ ~ ___, data = ___)</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
@@ -458,7 +458,10 @@ library(tidyverse)
 library(learnr)
 library(gradethis)
 
-tutorial_options(exercise.checker = gradethis::grade_learnr)
+tutorial_options(
+    exercise.checker = gradethis::grade_learnr,
+    exercise.completion = FALSE
+)
 gradethis_setup(
     exercise.reveal_solution = FALSE
 )
@@ -497,9 +500,10 @@ output$`tutorial-exercise-ldt_hist-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "ldt_hist", global_setup = structure(c("library(tidyverse)", 
-"library(learnr)", "library(gradethis)", "", "tutorial_options(exercise.checker = gradethis::grade_learnr)", 
-"gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
-"", "anscombe <- read_csv(\"data/cor_data.csv\")", "elp <- read_csv(\"data/elp.csv\")"
+"library(learnr)", "library(gradethis)", "", "tutorial_options(", 
+"    exercise.checker = gradethis::grade_learnr,", "    exercise.completion = FALSE", 
+")", "gradethis_setup(", "    exercise.reveal_solution = FALSE", 
+")", "", "anscombe <- read_csv(\"data/cor_data.csv\")", "elp <- read_csv(\"data/elp.csv\")"
 ), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
     chunks = list(list(label = "ldt_hist", code = "___ %>%\n  ggplot(aes(x = ___)) +\n  ___(binwidth=20)", 
         opts = list(label = "\"ldt_hist\"", exercise = "TRUE", 
@@ -526,10 +530,10 @@ learnr:::store_exercise_cache(structure(list(label = "ldt_hist", global_setup = 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
         max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
-        exercise.reveal_solution = FALSE, label = "ldt_hist", 
-        exercise = TRUE, exercise.eval = FALSE, code = c("___ %>%", 
-        "  ggplot(aes(x = ___)) +", "  ___(binwidth=20)"), out.width.px = 624, 
-        out.height.px = 384, params.src = "ldt_hist, exercise = TRUE, exercise.eval = FALSE", 
+        exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
+        label = "ldt_hist", exercise = TRUE, exercise.eval = FALSE, 
+        code = c("___ %>%", "  ggplot(aes(x = ___)) +", "  ___(binwidth=20)"
+        ), out.width.px = 624, out.height.px = 384, params.src = "ldt_hist, exercise = TRUE, exercise.eval = FALSE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r", 
     version = "3"), class = "tutorial_exercise"))
 </script>
@@ -544,9 +548,10 @@ output$`tutorial-exercise-ldt_aoa_scatter-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "ldt_aoa_scatter", global_setup = structure(c("library(tidyverse)", 
-"library(learnr)", "library(gradethis)", "", "tutorial_options(exercise.checker = gradethis::grade_learnr)", 
-"gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
-"", "anscombe <- read_csv(\"data/cor_data.csv\")", "elp <- read_csv(\"data/elp.csv\")"
+"library(learnr)", "library(gradethis)", "", "tutorial_options(", 
+"    exercise.checker = gradethis::grade_learnr,", "    exercise.completion = FALSE", 
+")", "gradethis_setup(", "    exercise.reveal_solution = FALSE", 
+")", "", "anscombe <- read_csv(\"data/cor_data.csv\")", "elp <- read_csv(\"data/elp.csv\")"
 ), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
     chunks = list(list(label = "ldt_aoa_scatter", code = "___ %>%\n  ggplot(aes(x = ___, y = ___)) +\n  ___()", 
         opts = list(label = "\"ldt_aoa_scatter\"", exercise = "TRUE", 
@@ -573,10 +578,11 @@ learnr:::store_exercise_cache(structure(list(label = "ldt_aoa_scatter", global_s
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
         max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
-        exercise.reveal_solution = FALSE, label = "ldt_aoa_scatter", 
-        exercise = TRUE, exercise.eval = FALSE, code = c("___ %>%", 
-        "  ggplot(aes(x = ___, y = ___)) +", "  ___()"), out.width.px = 624, 
-        out.height.px = 384, params.src = "ldt_aoa_scatter, exercise = TRUE, exercise.eval=FALSE", 
+        exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
+        label = "ldt_aoa_scatter", exercise = TRUE, exercise.eval = FALSE, 
+        code = c("___ %>%", "  ggplot(aes(x = ___, y = ___)) +", 
+        "  ___()"), out.width.px = 624, out.height.px = 384, 
+        params.src = "ldt_aoa_scatter, exercise = TRUE, exercise.eval=FALSE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r", 
     version = "3"), class = "tutorial_exercise"))
 </script>
@@ -591,9 +597,10 @@ output$`tutorial-exercise-aoa_lm_plot-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "aoa_lm_plot", global_setup = structure(c("library(tidyverse)", 
-"library(learnr)", "library(gradethis)", "", "tutorial_options(exercise.checker = gradethis::grade_learnr)", 
-"gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
-"", "anscombe <- read_csv(\"data/cor_data.csv\")", "elp <- read_csv(\"data/elp.csv\")"
+"library(learnr)", "library(gradethis)", "", "tutorial_options(", 
+"    exercise.checker = gradethis::grade_learnr,", "    exercise.completion = FALSE", 
+")", "gradethis_setup(", "    exercise.reveal_solution = FALSE", 
+")", "", "anscombe <- read_csv(\"data/cor_data.csv\")", "elp <- read_csv(\"data/elp.csv\")"
 ), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
     chunks = list(list(label = "aoa_lm_plot", code = "___ %>%\n  ggplot(aes(x = ___, y = ___)) +\n  ___() +\n  ___(method = \"lm\")", 
         opts = list(label = "\"aoa_lm_plot\"", exercise = "TRUE", 
@@ -620,10 +627,11 @@ learnr:::store_exercise_cache(structure(list(label = "aoa_lm_plot", global_setup
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
         max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
-        exercise.reveal_solution = FALSE, label = "aoa_lm_plot", 
-        exercise = TRUE, exercise.eval = FALSE, code = c("___ %>%", 
-        "  ggplot(aes(x = ___, y = ___)) +", "  ___() +", "  ___(method = \"lm\")"
-        ), out.width.px = 624, out.height.px = 384, params.src = "aoa_lm_plot, exercise = TRUE, exercise.eval=FALSE", 
+        exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
+        label = "aoa_lm_plot", exercise = TRUE, exercise.eval = FALSE, 
+        code = c("___ %>%", "  ggplot(aes(x = ___, y = ___)) +", 
+        "  ___() +", "  ___(method = \"lm\")"), out.width.px = 624, 
+        out.height.px = 384, params.src = "aoa_lm_plot, exercise = TRUE, exercise.eval=FALSE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r", 
     version = "3"), class = "tutorial_exercise"))
 </script>
@@ -638,9 +646,10 @@ output$`tutorial-exercise-aoa_ldt_cor-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "aoa_ldt_cor", global_setup = structure(c("library(tidyverse)", 
-"library(learnr)", "library(gradethis)", "", "tutorial_options(exercise.checker = gradethis::grade_learnr)", 
-"gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
-"", "anscombe <- read_csv(\"data/cor_data.csv\")", "elp <- read_csv(\"data/elp.csv\")"
+"library(learnr)", "library(gradethis)", "", "tutorial_options(", 
+"    exercise.checker = gradethis::grade_learnr,", "    exercise.completion = FALSE", 
+")", "gradethis_setup(", "    exercise.reveal_solution = FALSE", 
+")", "", "anscombe <- read_csv(\"data/cor_data.csv\")", "elp <- read_csv(\"data/elp.csv\")"
 ), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
     chunks = list(list(label = "aoa_ldt_cor", code = "___ %>%\n    summarize(r = cor(___, ___))", 
         opts = list(label = "\"aoa_ldt_cor\"", exercise = "TRUE", 
@@ -668,10 +677,10 @@ learnr:::store_exercise_cache(structure(list(label = "aoa_ldt_cor", global_setup
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
         max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
-        exercise.reveal_solution = FALSE, label = "aoa_ldt_cor", 
-        exercise = TRUE, exercise.eval = FALSE, code = c("___ %>%", 
-        "    summarize(r = cor(___, ___))"), out.width.px = 624, 
-        out.height.px = 384, params.src = "aoa_ldt_cor, exercise = TRUE, exercise.eval=FALSE", 
+        exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
+        label = "aoa_ldt_cor", exercise = TRUE, exercise.eval = FALSE, 
+        code = c("___ %>%", "    summarize(r = cor(___, ___))"
+        ), out.width.px = 624, out.height.px = 384, params.src = "aoa_ldt_cor, exercise = TRUE, exercise.eval=FALSE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r", 
     version = "3"), class = "tutorial_exercise"))
 </script>
@@ -686,9 +695,10 @@ output$`tutorial-exercise-aoa_ldt_lm-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "aoa_ldt_lm", global_setup = structure(c("library(tidyverse)", 
-"library(learnr)", "library(gradethis)", "", "tutorial_options(exercise.checker = gradethis::grade_learnr)", 
-"gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
-"", "anscombe <- read_csv(\"data/cor_data.csv\")", "elp <- read_csv(\"data/elp.csv\")"
+"library(learnr)", "library(gradethis)", "", "tutorial_options(", 
+"    exercise.checker = gradethis::grade_learnr,", "    exercise.completion = FALSE", 
+")", "gradethis_setup(", "    exercise.reveal_solution = FALSE", 
+")", "", "anscombe <- read_csv(\"data/cor_data.csv\")", "elp <- read_csv(\"data/elp.csv\")"
 ), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
     chunks = list(list(label = "aoa_ldt_lm", code = "lm(___ ~ ___, data = ___)", 
         opts = list(label = "\"aoa_ldt_lm\"", exercise = "TRUE", 
@@ -713,9 +723,10 @@ learnr:::store_exercise_cache(structure(list(label = "aoa_ldt_lm", global_setup 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
         max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
-        exercise.reveal_solution = FALSE, label = "aoa_ldt_lm", 
-        exercise = TRUE, exercise.eval = FALSE, code = "lm(___ ~ ___, data = ___)", 
-        out.width.px = 624, out.height.px = 384, params.src = "aoa_ldt_lm, exercise = TRUE, exercise.eval=FALSE", 
+        exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
+        label = "aoa_ldt_lm", exercise = TRUE, exercise.eval = FALSE, 
+        code = "lm(___ ~ ___, data = ___)", out.width.px = 624, 
+        out.height.px = 384, params.src = "aoa_ldt_lm, exercise = TRUE, exercise.eval=FALSE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r", 
     version = "3"), class = "tutorial_exercise"))
 </script>

@@ -257,7 +257,7 @@ function as part of a <code>summarize</code> line:</p>
 (<em>Hint:</em> think about what variable name to put inside the
 parentheses after “sum” on the last line.)</p>
 <div class="tutorial-exercise" data-label="sum_deviation"
-data-completion="1" data-diagnostics="1" data-startover="1"
+data-completion="0" data-diagnostics="1" data-startover="1"
 data-lines="0">
 <pre class="text"><code>my_data %&gt;%
     mutate(deviation = X - mean(X)) %&gt;%
@@ -451,7 +451,7 @@ summaries of central tendency and variability.</p>
 and standard deviation of the lifespans of the rats under each diet.
 <em>Hint:</em> recall the names of the functions we used to find these
 quantities earlier.</p>
-<div class="tutorial-exercise" data-label="rat_num" data-completion="1"
+<div class="tutorial-exercise" data-label="rat_num" data-completion="0"
 data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>___ %&gt;%
     group_by(___) %&gt;%
@@ -499,7 +499,10 @@ library(tidyverse)
 library(learnr)
 library(gradethis)
 
-tutorial_options(exercise.checker = gradethis::grade_learnr)
+tutorial_options(
+    exercise.checker = gradethis::grade_learnr,
+    exercise.completion = FALSE
+)
 gradethis_setup(
     exercise.reveal_solution = FALSE
 )
@@ -537,9 +540,10 @@ output$`tutorial-exercise-sum_deviation-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "sum_deviation", global_setup = structure(c("library(tidyverse)", 
-"library(learnr)", "library(gradethis)", "", "tutorial_options(exercise.checker = gradethis::grade_learnr)", 
-"gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
-"my_data <- tibble(X = c(91, 102, 107, 109, 111))", "rats <- read_csv('data/ratlives.csv')"
+"library(learnr)", "library(gradethis)", "", "tutorial_options(", 
+"    exercise.checker = gradethis::grade_learnr,", "    exercise.completion = FALSE", 
+")", "gradethis_setup(", "    exercise.reveal_solution = FALSE", 
+")", "my_data <- tibble(X = c(91, 102, 107, 109, 111))", "rats <- read_csv('data/ratlives.csv')"
 ), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
     chunks = list(list(label = "sum_deviation", code = "my_data %>%\n    mutate(deviation = X - mean(X)) %>%\n    mutate(squared_deviation = deviation^2) %>%\n    summarize(sum_deviation = sum(___))", 
         opts = list(label = "\"sum_deviation\"", exercise = "TRUE", 
@@ -566,11 +570,11 @@ learnr:::store_exercise_cache(structure(list(label = "sum_deviation", global_set
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
         max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
-        exercise.reveal_solution = FALSE, label = "sum_deviation", 
-        exercise = TRUE, exercise.eval = FALSE, code = c("my_data %>%", 
-        "    mutate(deviation = X - mean(X)) %>%", "    mutate(squared_deviation = deviation^2) %>%", 
-        "    summarize(sum_deviation = sum(___))"), out.width.px = 624, 
-        out.height.px = 384, params.src = "sum_deviation, exercise = TRUE, exercise.eval = FALSE", 
+        exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
+        label = "sum_deviation", exercise = TRUE, exercise.eval = FALSE, 
+        code = c("my_data %>%", "    mutate(deviation = X - mean(X)) %>%", 
+        "    mutate(squared_deviation = deviation^2) %>%", "    summarize(sum_deviation = sum(___))"
+        ), out.width.px = 624, out.height.px = 384, params.src = "sum_deviation, exercise = TRUE, exercise.eval = FALSE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r", 
     version = "3"), class = "tutorial_exercise"))
 </script>
@@ -585,9 +589,10 @@ output$`tutorial-exercise-rat_num-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "rat_num", global_setup = structure(c("library(tidyverse)", 
-"library(learnr)", "library(gradethis)", "", "tutorial_options(exercise.checker = gradethis::grade_learnr)", 
-"gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
-"my_data <- tibble(X = c(91, 102, 107, 109, 111))", "rats <- read_csv('data/ratlives.csv')"
+"library(learnr)", "library(gradethis)", "", "tutorial_options(", 
+"    exercise.checker = gradethis::grade_learnr,", "    exercise.completion = FALSE", 
+")", "gradethis_setup(", "    exercise.reveal_solution = FALSE", 
+")", "my_data <- tibble(X = c(91, 102, 107, 109, 111))", "rats <- read_csv('data/ratlives.csv')"
 ), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
     chunks = list(list(label = "rat_num", code = "___ %>%\n    group_by(___) %>%\n    ___(Mean = ___, SD = ___)", 
         opts = list(label = "\"rat_num\"", exercise = "TRUE", 
@@ -614,9 +619,9 @@ learnr:::store_exercise_cache(structure(list(label = "rat_num", global_setup = s
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
         max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
-        exercise.reveal_solution = FALSE, label = "rat_num", 
-        exercise = TRUE, exercise.eval = FALSE, code = c("___ %>%", 
-        "    group_by(___) %>%", "    ___(Mean = ___, SD = ___)"
+        exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
+        label = "rat_num", exercise = TRUE, exercise.eval = FALSE, 
+        code = c("___ %>%", "    group_by(___) %>%", "    ___(Mean = ___, SD = ___)"
         ), out.width.px = 624, out.height.px = 384, params.src = "rat_num, exercise = TRUE, exercise.eval=FALSE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r", 
     version = "3"), class = "tutorial_exercise"))

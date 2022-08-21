@@ -132,7 +132,7 @@ of code written in the “R” language. Code will appear in special boxes
 like the one below. The box below is code that tells R to add the
 numbers 2 and 3. Click the “Run Code” button to see the result.</p>
 <div class="tutorial-exercise" data-label="simple_addition"
-data-completion="1" data-diagnostics="1" data-startover="1"
+data-completion="0" data-diagnostics="1" data-startover="1"
 data-lines="1">
 <pre class="text"><code>2 + 3</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
@@ -147,7 +147,7 @@ button to see the result of what you wrote, and the “Submit Answer”
 button to see if your code is correct (note that you can get the correct
 output from R without necessarily using the correct code!).</p>
 <div class="tutorial-exercise" data-label="addition_ex"
-data-completion="1" data-diagnostics="1" data-startover="1"
+data-completion="0" data-diagnostics="1" data-startover="1"
 data-lines="1">
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
@@ -384,7 +384,7 @@ the number of female passengers who did and did not survive.</em>
 <em>Hint 2: Use the “Submit Answer” button to check if the proportion
 you calculated is correct.</em>.</p>
 <div class="tutorial-exercise" data-label="male_survivors"
-data-completion="1" data-diagnostics="1" data-startover="1"
+data-completion="0" data-diagnostics="1" data-startover="1"
 data-lines="1">
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
@@ -421,7 +421,7 @@ shows the proportion of people in each class (1, 2, or 3) who survived
 or died. Give that a try now by filling in the blanks in the code
 below:</p>
 <div class="tutorial-exercise" data-label="class_survivors"
-data-completion="1" data-diagnostics="1" data-startover="1"
+data-completion="0" data-diagnostics="1" data-startover="1"
 data-lines="0">
 <pre class="text"><code>___ %&gt;%
   group_by(___, ___) %&gt;%
@@ -487,7 +487,7 @@ fill in the blanks in the code below so that each “facet” corresponds to
 country of residence and each “facet” has two bars in it, one bar for
 survivors and one bar for non-survivors.</p>
 <div class="tutorial-exercise" data-label="resid_survivor"
-data-completion="1" data-diagnostics="1" data-startover="1"
+data-completion="0" data-diagnostics="1" data-startover="1"
 data-lines="0">
 <pre class="text"><code>titanic %&gt;%
   ggplot(aes(x = ___)) +
@@ -605,7 +605,10 @@ library(learnr)
 library(gradethis)
 
 # knitr::opts_chunk$set(echo = FALSE)
-tutorial_options(exercise.checker = gradethis::grade_learnr)
+tutorial_options(
+    exercise.checker = gradethis::grade_learnr,
+    exercise.completion = FALSE
+)
 gradethis_setup(
     exercise.reveal_solution = FALSE
 )
@@ -643,9 +646,9 @@ output$`tutorial-exercise-simple_addition-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "simple_addition", global_setup = structure(c("library(tidyverse)", 
 "library(learnr)", "library(gradethis)", "", "# knitr::opts_chunk$set(echo = FALSE)", 
-"tutorial_options(exercise.checker = gradethis::grade_learnr)", 
-"gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
-"titanic <- read_csv(\"data/titanic.csv\")"), chunk_opts = list(
+"tutorial_options(", "    exercise.checker = gradethis::grade_learnr,", 
+"    exercise.completion = FALSE", ")", "gradethis_setup(", "    exercise.reveal_solution = FALSE", 
+")", "titanic <- read_csv(\"data/titanic.csv\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "simple_addition", code = "2 + 3", opts = list(
         label = "\"simple_addition\"", exercise = "TRUE", exercise.lines = "1"), 
@@ -668,9 +671,10 @@ learnr:::store_exercise_cache(structure(list(label = "simple_addition", global_s
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
         max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
-        exercise.reveal_solution = FALSE, label = "simple_addition", 
-        exercise = TRUE, exercise.lines = 1, code = "2 + 3", 
-        out.width.px = 624, out.height.px = 384, params.src = "simple_addition, exercise = TRUE, exercise.lines = 1", 
+        exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
+        label = "simple_addition", exercise = TRUE, exercise.lines = 1, 
+        code = "2 + 3", out.width.px = 624, out.height.px = 384, 
+        params.src = "simple_addition, exercise = TRUE, exercise.lines = 1", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r", 
     version = "3"), class = "tutorial_exercise"))
 </script>
@@ -686,9 +690,9 @@ output$`tutorial-exercise-addition_ex-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "addition_ex", global_setup = structure(c("library(tidyverse)", 
 "library(learnr)", "library(gradethis)", "", "# knitr::opts_chunk$set(echo = FALSE)", 
-"tutorial_options(exercise.checker = gradethis::grade_learnr)", 
-"gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
-"titanic <- read_csv(\"data/titanic.csv\")"), chunk_opts = list(
+"tutorial_options(", "    exercise.checker = gradethis::grade_learnr,", 
+"    exercise.completion = FALSE", ")", "gradethis_setup(", "    exercise.reveal_solution = FALSE", 
+")", "titanic <- read_csv(\"data/titanic.csv\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "addition_ex", code = "", opts = list(label = "\"addition_ex\"", 
         exercise = "TRUE", exercise.lines = "1"), engine = "r")), 
@@ -713,9 +717,9 @@ learnr:::store_exercise_cache(structure(list(label = "addition_ex", global_setup
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
         max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
-        exercise.reveal_solution = FALSE, label = "addition_ex", 
-        exercise = TRUE, exercise.lines = 1, code = "", out.width.px = 624, 
-        out.height.px = 384, params.src = "addition_ex, exercise = TRUE, exercise.lines = 1", 
+        exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
+        label = "addition_ex", exercise = TRUE, exercise.lines = 1, 
+        code = "", out.width.px = 624, out.height.px = 384, params.src = "addition_ex, exercise = TRUE, exercise.lines = 1", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
     version = "3"), class = "tutorial_exercise"))
 </script>
@@ -731,9 +735,9 @@ output$`tutorial-exercise-male_survivors-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "male_survivors", global_setup = structure(c("library(tidyverse)", 
 "library(learnr)", "library(gradethis)", "", "# knitr::opts_chunk$set(echo = FALSE)", 
-"tutorial_options(exercise.checker = gradethis::grade_learnr)", 
-"gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
-"titanic <- read_csv(\"data/titanic.csv\")"), chunk_opts = list(
+"tutorial_options(", "    exercise.checker = gradethis::grade_learnr,", 
+"    exercise.completion = FALSE", ")", "gradethis_setup(", "    exercise.reveal_solution = FALSE", 
+")", "titanic <- read_csv(\"data/titanic.csv\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "male_survivors", code = "", opts = list(label = "\"male_survivors\"", 
         exercise = "TRUE", exercise.lines = "1"), engine = "r")), 
@@ -758,9 +762,9 @@ learnr:::store_exercise_cache(structure(list(label = "male_survivors", global_se
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
         max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
-        exercise.reveal_solution = FALSE, label = "male_survivors", 
-        exercise = TRUE, exercise.lines = 1, code = "", out.width.px = 624, 
-        out.height.px = 384, params.src = "male_survivors, exercise = TRUE, exercise.lines = 1", 
+        exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
+        label = "male_survivors", exercise = TRUE, exercise.lines = 1, 
+        code = "", out.width.px = 624, out.height.px = 384, params.src = "male_survivors, exercise = TRUE, exercise.lines = 1", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
     version = "3"), class = "tutorial_exercise"))
 </script>
@@ -776,9 +780,9 @@ output$`tutorial-exercise-class_survivors-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "class_survivors", global_setup = structure(c("library(tidyverse)", 
 "library(learnr)", "library(gradethis)", "", "# knitr::opts_chunk$set(echo = FALSE)", 
-"tutorial_options(exercise.checker = gradethis::grade_learnr)", 
-"gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
-"titanic <- read_csv(\"data/titanic.csv\")"), chunk_opts = list(
+"tutorial_options(", "    exercise.checker = gradethis::grade_learnr,", 
+"    exercise.completion = FALSE", ")", "gradethis_setup(", "    exercise.reveal_solution = FALSE", 
+")", "titanic <- read_csv(\"data/titanic.csv\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "class_survivors", code = "___ %>%\n  group_by(___, ___) %>%\n  summarize(n = n()) %>%\n  mutate(p = n / sum(n))", 
         opts = list(label = "\"class_survivors\"", exercise = "TRUE", 
@@ -807,9 +811,9 @@ learnr:::store_exercise_cache(structure(list(label = "class_survivors", global_s
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
         max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
-        exercise.reveal_solution = FALSE, label = "class_survivors", 
-        exercise = TRUE, exercise.eval = FALSE, code = c("___ %>%", 
-        "  group_by(___, ___) %>%", "  summarize(n = n()) %>%", 
+        exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
+        label = "class_survivors", exercise = TRUE, exercise.eval = FALSE, 
+        code = c("___ %>%", "  group_by(___, ___) %>%", "  summarize(n = n()) %>%", 
         "  mutate(p = n / sum(n))"), out.width.px = 624, out.height.px = 384, 
         params.src = "class_survivors, exercise = TRUE, exercise.eval = FALSE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r", 
@@ -827,9 +831,9 @@ output$`tutorial-exercise-resid_survivor-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "resid_survivor", global_setup = structure(c("library(tidyverse)", 
 "library(learnr)", "library(gradethis)", "", "# knitr::opts_chunk$set(echo = FALSE)", 
-"tutorial_options(exercise.checker = gradethis::grade_learnr)", 
-"gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
-"titanic <- read_csv(\"data/titanic.csv\")"), chunk_opts = list(
+"tutorial_options(", "    exercise.checker = gradethis::grade_learnr,", 
+"    exercise.completion = FALSE", ")", "gradethis_setup(", "    exercise.reveal_solution = FALSE", 
+")", "titanic <- read_csv(\"data/titanic.csv\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "resid_survivor", code = "titanic %>%\n  ggplot(aes(x = ___)) +\n  geom_bar() +\n  facet_wrap(\"___\")", 
         opts = list(label = "\"resid_survivor\"", exercise = "TRUE", 
@@ -856,10 +860,11 @@ learnr:::store_exercise_cache(structure(list(label = "resid_survivor", global_se
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
         max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
-        exercise.reveal_solution = FALSE, label = "resid_survivor", 
-        exercise = TRUE, exercise.eval = FALSE, code = c("titanic %>%", 
-        "  ggplot(aes(x = ___)) +", "  geom_bar() +", "  facet_wrap(\"___\")"
-        ), out.width.px = 624, out.height.px = 384, params.src = "resid_survivor, exercise = TRUE, exercise.eval = FALSE", 
+        exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
+        label = "resid_survivor", exercise = TRUE, exercise.eval = FALSE, 
+        code = c("titanic %>%", "  ggplot(aes(x = ___)) +", "  geom_bar() +", 
+        "  facet_wrap(\"___\")"), out.width.px = 624, out.height.px = 384, 
+        params.src = "resid_survivor, exercise = TRUE, exercise.eval = FALSE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r", 
     version = "3"), class = "tutorial_exercise"))
 </script>

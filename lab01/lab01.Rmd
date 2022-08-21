@@ -13,7 +13,10 @@ library(learnr)
 library(gradethis)
 
 # knitr::opts_chunk$set(echo = FALSE)
-tutorial_options(exercise.checker = gradethis::grade_learnr)
+tutorial_options(
+    exercise.checker = gradethis::grade_learnr,
+    exercise.completion = FALSE
+)
 gradethis_setup(
     exercise.reveal_solution = FALSE
 )

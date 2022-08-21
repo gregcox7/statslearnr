@@ -216,7 +216,7 @@ which “filters” out some redundant rows of the table to make it from
 being too long). Remember that you can use the “Submit Answer” button to
 check your work.</p>
 <div class="tutorial-exercise" data-label="department_admit"
-data-completion="1" data-diagnostics="1" data-startover="1"
+data-completion="0" data-diagnostics="1" data-startover="1"
 data-lines="0">
 <pre class="text"><code>___ %&gt;%
   group_by(___, ___, Admit) %&gt;%
@@ -249,7 +249,7 @@ were admitted or not?</p>
 proportion of applicants for each department who were either male or
 female.</p>
 <div class="tutorial-exercise" data-label="gender_apply"
-data-completion="1" data-diagnostics="1" data-startover="1"
+data-completion="0" data-diagnostics="1" data-startover="1"
 data-lines="0">
 <pre class="text"><code>___ %&gt;%
   group_by(___, ___) %&gt;%
@@ -270,7 +270,7 @@ each department.</p>
 admitted for each department, regardless of gender. You may find it
 useful to modify the chunk of code you just used.</p>
 <div class="tutorial-exercise" data-label="admit_apply"
-data-completion="1" data-diagnostics="1" data-startover="1"
+data-completion="0" data-diagnostics="1" data-startover="1"
 data-lines="0">
 <pre class="text"><code>___ %&gt;%
   group_by(___, ___) %&gt;%
@@ -361,7 +361,10 @@ library(tidyverse)
 library(learnr)
 library(gradethis)
 
-tutorial_options(exercise.checker = gradethis::grade_learnr)
+tutorial_options(
+    exercise.checker = gradethis::grade_learnr,
+    exercise.completion = FALSE
+)
 gradethis_setup(
     exercise.reveal_solution = FALSE
 )
@@ -398,9 +401,10 @@ output$`tutorial-exercise-department_admit-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "department_admit", global_setup = structure(c("library(tidyverse)", 
-"library(learnr)", "library(gradethis)", "", "tutorial_options(exercise.checker = gradethis::grade_learnr)", 
-"gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
-"berkeley <- read_csv(\"data/berkeley.csv\")"), chunk_opts = list(
+"library(learnr)", "library(gradethis)", "", "tutorial_options(", 
+"    exercise.checker = gradethis::grade_learnr,", "    exercise.completion = FALSE", 
+")", "gradethis_setup(", "    exercise.reveal_solution = FALSE", 
+")", "berkeley <- read_csv(\"data/berkeley.csv\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "department_admit", code = "___ %>%\n  group_by(___, ___, Admit) %>%\n  summarize(n = n()) %>%\n  mutate(p = n / sum(n)) %>%\n  filter(Admit == \"Admitted\")", 
         opts = list(label = "\"department_admit\"", exercise = "TRUE", 
@@ -431,11 +435,12 @@ learnr:::store_exercise_cache(structure(list(label = "department_admit", global_
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
         max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
-        exercise.reveal_solution = FALSE, label = "department_admit", 
-        exercise = TRUE, exercise.eval = FALSE, code = c("___ %>%", 
-        "  group_by(___, ___, Admit) %>%", "  summarize(n = n()) %>%", 
-        "  mutate(p = n / sum(n)) %>%", "  filter(Admit == \"Admitted\")"
-        ), out.width.px = 624, out.height.px = 384, params.src = "department_admit, exercise = TRUE, exercise.eval = FALSE", 
+        exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
+        label = "department_admit", exercise = TRUE, exercise.eval = FALSE, 
+        code = c("___ %>%", "  group_by(___, ___, Admit) %>%", 
+        "  summarize(n = n()) %>%", "  mutate(p = n / sum(n)) %>%", 
+        "  filter(Admit == \"Admitted\")"), out.width.px = 624, 
+        out.height.px = 384, params.src = "department_admit, exercise = TRUE, exercise.eval = FALSE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r", 
     version = "3"), class = "tutorial_exercise"))
 </script>
@@ -450,9 +455,10 @@ output$`tutorial-exercise-gender_apply-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "gender_apply", global_setup = structure(c("library(tidyverse)", 
-"library(learnr)", "library(gradethis)", "", "tutorial_options(exercise.checker = gradethis::grade_learnr)", 
-"gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
-"berkeley <- read_csv(\"data/berkeley.csv\")"), chunk_opts = list(
+"library(learnr)", "library(gradethis)", "", "tutorial_options(", 
+"    exercise.checker = gradethis::grade_learnr,", "    exercise.completion = FALSE", 
+")", "gradethis_setup(", "    exercise.reveal_solution = FALSE", 
+")", "berkeley <- read_csv(\"data/berkeley.csv\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "gender_apply", code = "___ %>%\n  group_by(___, ___) %>%\n  summarize(n = n()) %>%\n  mutate(p = n / sum(n))", 
         opts = list(label = "\"gender_apply\"", exercise = "TRUE", 
@@ -481,9 +487,9 @@ learnr:::store_exercise_cache(structure(list(label = "gender_apply", global_setu
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
         max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
-        exercise.reveal_solution = FALSE, label = "gender_apply", 
-        exercise = TRUE, exercise.eval = FALSE, code = c("___ %>%", 
-        "  group_by(___, ___) %>%", "  summarize(n = n()) %>%", 
+        exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
+        label = "gender_apply", exercise = TRUE, exercise.eval = FALSE, 
+        code = c("___ %>%", "  group_by(___, ___) %>%", "  summarize(n = n()) %>%", 
         "  mutate(p = n / sum(n))"), out.width.px = 624, out.height.px = 384, 
         params.src = "gender_apply, exercise = TRUE, exercise.eval = FALSE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r", 
@@ -500,9 +506,10 @@ output$`tutorial-exercise-admit_apply-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "admit_apply", global_setup = structure(c("library(tidyverse)", 
-"library(learnr)", "library(gradethis)", "", "tutorial_options(exercise.checker = gradethis::grade_learnr)", 
-"gradethis_setup(", "    exercise.reveal_solution = FALSE", ")", 
-"berkeley <- read_csv(\"data/berkeley.csv\")"), chunk_opts = list(
+"library(learnr)", "library(gradethis)", "", "tutorial_options(", 
+"    exercise.checker = gradethis::grade_learnr,", "    exercise.completion = FALSE", 
+")", "gradethis_setup(", "    exercise.reveal_solution = FALSE", 
+")", "berkeley <- read_csv(\"data/berkeley.csv\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "admit_apply", code = "___ %>%\n  group_by(___, ___) %>%\n  summarize(n = n()) %>%\n  mutate(p = n / sum(n))", 
         opts = list(label = "\"admit_apply\"", exercise = "TRUE", 
@@ -531,9 +538,9 @@ learnr:::store_exercise_cache(structure(list(label = "admit_apply", global_setup
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
         max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
-        exercise.reveal_solution = FALSE, label = "admit_apply", 
-        exercise = TRUE, exercise.eval = FALSE, code = c("___ %>%", 
-        "  group_by(___, ___) %>%", "  summarize(n = n()) %>%", 
+        exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
+        label = "admit_apply", exercise = TRUE, exercise.eval = FALSE, 
+        code = c("___ %>%", "  group_by(___, ___) %>%", "  summarize(n = n()) %>%", 
         "  mutate(p = n / sum(n))"), out.width.px = 624, out.height.px = 384, 
         params.src = "admit_apply, exercise = TRUE, exercise.eval = FALSE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r", 
