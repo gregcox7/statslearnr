@@ -319,7 +319,7 @@ titanic %>%
 grade_this_code()
 ```
 
-What is a possible reason why the relative number of survivors is different depending on where passengers were from?
+What is a possible reason why the relative number of survivors is different depending on where passengers were from?  *Hint: think about how country of residence is related to class.*
 
 ---
 
@@ -372,7 +372,7 @@ titanic %>%
 
 Try making several different histograms of passenger age split by survival, using different bin widths of your own choice:
 
-```{r eval = FALSE}
+```{r age_binwidth, exercise = TRUE, exercise.eval = FALSE}
 titanic %>%
   ggplot(aes(x = age)) +
   geom_histogram(binwidth = ___) +
