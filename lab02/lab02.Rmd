@@ -126,7 +126,7 @@ berkeley %>%
 grade_this_code()
 ```
 
-Based on the table you just made, which departments admit a higher proportion of female applicants and which admit a higher proportion of male applicants?
+Based on the table you just made, which departments admit a higher proportion of female applicants than male applicants?  Which departments admit a higher proportion of male applicants than female applicants?
 
 ---
 
@@ -210,32 +210,33 @@ For each department, compare the proportion of applicants admitted to the propor
 
 ### Resolving the paradox: Bar charts
 
-Finally, let's create a visualization that may help us put these pieces together.  The chunk of code below produces a set of bar charts, one for each department.  These are similar to those we made in the previous activity, but have a new "aesthetic", namely, they use a variable (`Gender`) to `fill` in the bars with different colors:
+Finally, let's create a visualization that may help us put these pieces together.
 
-```{r}
+Use the chunk of code below to produce a set of bar charts.  Make a different *facet* for each department.  Within each "facet", use `Admit` as the $x$ variable.  We will also use a new "aesthetic": use the `Gender` variable to `fill` in the bars with different colors.
+
+When you make your plot, the total height of each bar will represent the total number of applicants for each department who were either admitted or rejected.  Each bar will be divided into two parts in different colors, representing the numbers of male and female applicants in each bar.  (Remember to check your code using the "Submit Answer" button below before continuing.)
+
+```{r berkeley_bar, exercise = TRUE, exercise.eval = FALSE}
+___ %>%
+  ggplot(aes(x = ___, fill = ___)) +
+  geom_bar() +
+  facet_wrap("___")
+```
+
+```{r berkeley_bar-solution}
 berkeley %>%
   ggplot(aes(x = Admit, fill = Gender)) +
   geom_bar() +
   facet_wrap("Department")
 ```
 
----
-
-**Exercise 6**
-
-Compare the code we just ran to create a colored bar chart with this chunk of code we used to make a bar chart in the previous activity:
-
-```{r eval = FALSE}
-titanic %>%
-  ggplot(aes(x = class)) +
-  geom_bar()
+```{r berkeley_bar-check}
+grade_this_code()
 ```
 
-Describe in your own words at least 2 similarities and at least 2 differences between the chunk of code from the previous activity and the chunk of code we just used to analyze the Berkeley data.
+### Putting it all together
 
----
-
-In the plot we just made, the total height of each bar represents the total number of applicants for each department who were either admitted or rejected.  Each bar is divided into two parts in different colors, representing the numbers of male and female applicants in each bar.  You can use the total height of the bars to see the relative number of people who were admitted vs. rejected in each department; you can use the amount of red vs. teal in each panel to see the relative number of female vs. male applicants for each department.
+With the plot you just made, you can use the total height of each bar to see the relative number of people who were admitted vs. rejected in each department.  You can use the amount of red vs. teal in each panel to see the relative number of female vs. male applicants for each department.
 
 Putting the pieces together, we have found the following:
 
@@ -247,7 +248,7 @@ Finally, we should note that, although the names of the specific departments hav
 
 ---
 
-**Exercise 7**
+**Exercise 6**
 
 Even though these results do not suggest a sex bias in admissions at the level of individual departments, what other kinds of bias do these results suggest might be going on?  How are these potential biases related to the types of sampling biases we've discussed in class and in the book?
 
