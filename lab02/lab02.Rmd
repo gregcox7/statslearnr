@@ -167,7 +167,7 @@ berkeley %>%
 grade_this_code()
 ```
 
-Based on the table you just produced, which departments have more male than female applicants?  Is there any overlap between these departments and those you identified in the previous exercise as admitting a higher proportion of female than male applicants?
+Based on the table you just produced, which departments receive (regardless of whether they are admitted) more male than female applicants?  Is there any overlap between these departments and those you identified in the previous exercise as admitting a higher proportion of female than male applicants?
 
 ---
 
@@ -204,7 +204,7 @@ berkeley %>%
 grade_this_code()
 ```
 
-For each department, compare the proportion of applicants admitted to the proportion of applicants who are female.  Describe any relationship between those two proportions that you might see.
+Which departments admit more applicants than they reject?  Is there any overlap between these departments and those that receive more male than female applicants (this is the info you found in the last exercise)?
 
 ---
 
