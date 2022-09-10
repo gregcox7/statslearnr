@@ -45,6 +45,19 @@ These summaries involve a somewhat long chain of calculations.  It is important 
 
 A good numerical summary of variability should tell us how much we would expect the observed values of a variable to differ from what is "typical".  This is what "standard deviation" means: it is a summary of the typical ("standard") amount by which observed values of some variable tend to differ ("deviate") from their central tendency.  The variance and standard deviation are based on using the *mean* to describe central tendency.
 
+The whole formula to find the *standard deviation* (labeled $s$) looks like this:
+$$
+s = \sqrt{\frac{\sum_{i = 1}^n \left(x_i - \bar{x} \right)^2}{n - 1}}
+$$
+
+In the first part of this activity, we will break up this formula into its components.  As we'll see, this formula is really a *recipe*, a series of steps to follow to get from a set of observations of a numerical variable:
+
+$$
+s = \overbrace{\sqrt{\underbrace{\frac{\overbrace{\sum_{i = 1}^n \underbrace{\left(\overbrace{x_i - \underbrace{\bar{x}}_{\text{1: Find the mean}}}^{\text{2: Find the deviations}} \right)^2}_{\text{3: Square the deviations}}}^{\text{4: Add up squared deviations}}}{n - 1}}_{\text{5: Divide by } n - 1 \text{ (variance)}}}}^{\text{6: Take the square root (standard deviation)}}
+$$
+
+Now let's follow these steps with a concrete example.
+
 ### Check out the data
 
 To see how the variance and standard deviation are calculated, let's create a very small fake data set, which we will creatively call `my_data`.  It contains 5 observations of a single variable called "X".
@@ -73,14 +86,6 @@ Rather than typing in the numbers manually, we can instead use R's `mean` functi
 my_data %>%
     summarize(mean(X))
 ```
-
----
-
-**Exercise 1**
-
-When we've used the "summarize" function in previous sessions, we always preceded it with a `group_by` line.  Say in your own words why we didn't use a `group_by` line to find the mean in the chunk of code we just ran.
-
----
 
 ### Step 2: Find the deviations from the mean
 
@@ -118,21 +123,19 @@ my_data %>%
 
 ---
 
-**Exercise 2**
+**Exercise 1**
 
-Modify the chunk of code we just ran to just add up the `deviation`s instead of the `squared_deviation`s.  (*Hint:* think about what variable name to put inside the parentheses after "sum" on the last line.)
+Modify the following chunk of code to add up the raw `deviation`s instead of the `squared_deviation`s.  (*Hint:* think about what variable name to put inside the parentheses after "sum" on the last line.)
 
 ```{r sum_deviation, exercise = TRUE, exercise.eval = FALSE}
 my_data %>%
     mutate(deviation = X - mean(X)) %>%
-    mutate(squared_deviation = deviation^2) %>%
     summarize(sum_deviation = sum(___))
 ```
 
 ```{r sum_deviation-solution}
 my_data %>%
     mutate(deviation = X - mean(X)) %>%
-    mutate(squared_deviation = deviation^2) %>%
     summarize(sum_deviation = sum(deviation))
 ```
 
@@ -183,7 +186,7 @@ The code we just ran is much more compact, readable, and less liable to lead to 
 
 ---
 
-**Exercise 3**
+**Exercise 2**
 
 Take a look at how we used the `mutate` and `summarize` lines when we were calculating the variance and standard deviation step-by-step.  In your own words, describe a basic difference between what a `mutate` line is used for and what a `summarize` line is used for.
 
@@ -211,16 +214,16 @@ Although numerical summaries like the mean, variance, and standard deviation are
 
 Let's make a facetted histogram that shows the distribution of lifespans of the rats under each diet.  We will use an option under `facet_wrap` that lets us set the `n`umber of `col`umns (`ncol`) so we can see the facets stacked atop one another.
 
-```{r}
+```{r rat_histogram, exercise = TRUE, exercise.eval = TRUE}
 rats %>%
-    ggplot(aes(x=Lifespan)) +
-    geom_histogram(binwidth=90) +
+    ggplot(aes(x = Lifespan)) +
+    geom_histogram(binwidth = 90) +
     facet_wrap("Diet", ncol = 1)
 ```
 
 ---
 
-**Exercise 4**
+**Exercise 3**
 
 First, let's describe what we can see from the histograms (you may also try out other bin widths for the histograms as you like).
 
@@ -233,17 +236,35 @@ b. Compare the two distributions.  Be sure to note whether there seem to be any 
 
 We've also seen some examples of **boxplots** as useful visual summaries of data.  The "box" of the boxplot encloses the "inter-quartile range" (IQR), that is, the middle 50% of the data that falls between the 25th and 75th percentiles.  The line in the middle of the box shows where the median is.  Boxplots are easy to produce in R by using `geom_boxplot` instead of `geom_histogram`:
 
-```{r}
-rats %>%
-    ggplot(aes(x=Lifespan, y=Diet)) +
+---
+
+**Exercise 4**
+
+Fill in the blanks below to create a *boxplot* that summarizes the distribution of lifespans for each diet group.  *Hint:* try putting the name of the explanatory variable in the blank following `x` and the name of the response variable in the blank following `y`.  Then try doing it the other way (explanatory variable name following `y`, response variable name following `x`).  Either way works, it's up to you which you prefer!
+
+```{r rat_box_plot, exercise = TRUE, exercise.eval = FALSE}
+___ %>%
+    ggplot(aes(x = ___, y = ___)) +
     geom_boxplot()
 ```
 
----
+```{r rat_box_plot-solution}
+# lifespan then diet ---- 
+rats %>%
+    ggplot(aes(x = Lifespan, y = Diet)) +
+    geom_boxplot()
 
-**Exercise 5**
+# diet then lifespan ---- 
+rats %>%
+    ggplot(aes(x = Diet, y = Lifespan)) +
+    geom_boxplot()
+```
 
-Compare the boxplots and histograms we just made.
+```{r rat_box_plot-check}
+grade_this_code()
+```
+
+Compare the boxplot you just made with the histograms of lifespan we made above.
 
 a. What sorts of things seem easier to do with the boxplots as opposed to histograms?  Think about what features of the data might be easier to see with a boxplot and what comparisons might be easier to make using a boxplot.
 b. Do you lose anything by using a boxplot instead of a histogram?  Are there any important features of the data that are harder to see in the boxplot?
@@ -259,25 +280,25 @@ R can find the median and IQR for us:
 ```{r}
 rats %>%
     group_by(Diet) %>%
-    summarize(Median = median(Lifespan), IQR = IQR(Lifespan))
+    summarize(Median_Lifespan = median(Lifespan), IQR_of_Lifespan = IQR(Lifespan))
 ```
 
 ---
 
-**Exercise 6**
+**Exercise 5**
 
 Fill in the blanks in the following chunk of code to find the mean and standard deviation of the lifespans of the rats under each diet.  *Hint:* recall the names of the functions we used to find these quantities earlier.
 
 ```{r rat_num, exercise = TRUE, exercise.eval=FALSE}
 ___ %>%
     group_by(___) %>%
-    ___(Mean = ___, SD = ___)
+    ___(Mean_Lifespan = ___, SD_of_Lifespan = ___)
 ```
 
 ```{r rat_num-solution}
 rats %>%
     group_by(Diet) %>%
-    summarize(Mean = mean(Lifespan), SD = sd(Lifespan))
+    summarize(Mean_Lifespan = mean(Lifespan), SD_of_Lifespan = sd(Lifespan))
 ```
 
 ```{r rat_num-check}
@@ -292,12 +313,12 @@ These numerical summaries of central tendency and variability provide a concise 
 
 ---
 
-**Exercise 7**
+**Exercise 6**
 
 Based on the visual and numerical summaries we have made, let us draw some conclusions about that research question.
 
 a. Briefly describe the differences in lifespans between rats under a restricted diet versus rats with a free diet.
-b. Based on the design of the study, can we conclude that the differences in diet may have played a role in *causing* the observed differences in lifespan in this sample?  Why or why not?
+b. Based on how rats were assigned to each type of diet, can we conclude that the different diets may have played a role in *causing* the observed differences in lifespan in this sample?  Why or why not?
 c. What is the population to which you think we could *generalize* these results?
 
 ---
