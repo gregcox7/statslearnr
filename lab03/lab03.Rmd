@@ -212,9 +212,9 @@ As you can see, there are just two variables in this dataset, **Diet** and **Lif
 
 Although numerical summaries like the mean, variance, and standard deviation are important, they should always be accompanied by visual summaries in order to get a more complete understanding of the data.
 
-Let's make a facetted histogram that shows the distribution of lifespans of the rats under each diet.  We will use an option under `facet_wrap` that lets us set the `n`umber of `col`umns (`ncol`) so we can see the facets stacked atop one another.
+Run the following code to make a facetted histogram that shows the distribution of lifespans of the rats under each diet.  We will use an option under `facet_wrap` that lets us set the `n`umber of `col`umns (`ncol`) so we can see the facets stacked atop one another.
 
-```{r rat_histogram, exercise = TRUE, exercise.eval = TRUE}
+```{r rat_histogram, exercise = TRUE, exercise.eval = FALSE}
 rats %>%
     ggplot(aes(x = Lifespan)) +
     geom_histogram(binwidth = 90) +
