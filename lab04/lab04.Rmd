@@ -100,25 +100,30 @@ The `LDT` variable contains the lexical decision time for each word in the datas
 
 **Exercise 2**
 
-Fill in the blanks in the code below to make a histogram of lexical decision times across all words, using a binwidth of 20 milliseconds.
+Fill in the blanks in the code below to make a histogram of lexical decision times across all words, using a binwidth of 20 milliseconds.  *Hint:* Remember that you will need
+
+1. the name of the dataset;
+2. the name of the variable in that dataset that contains the lexical decision times;
+3. the name of the function we use to make a histogram; and
+4. to tell R the width of the bins we want to use.
 
 ```{r ldt_hist, exercise = TRUE, exercise.eval = FALSE}
 ___ %>%
   ggplot(aes(x = ___)) +
-  ___(binwidth=20)
+  ___(binwidth = ___)
 ```
 
 ```{r ldt_hist-solution}
 elp %>%
   ggplot(aes(x = LDT)) +
-  geom_histogram(binwidth=20)
+  geom_histogram(binwidth = 20)
 ```
 
 ```{r ldt_hist-check}
 grade_this_code()
 ```
 
-Describe the distribution of lexical decision times across words (you can re-run the code to look at other binwidths if you like).  Be sure to note the number of modes, skewness, and whether there are any potential outliers.
+Describe the distribution of lexical decision times across words (you can re-run the code using other binwidths if you like).  Be sure to note the number of modes, skewness, and whether there are any potential outliers.
 
 ---
 

@@ -50,7 +50,7 @@ $$
 s = \sqrt{\frac{\sum_{i = 1}^n \left(x_i - \bar{x} \right)^2}{n - 1}}
 $$
 
-In the first part of this activity, we will break up this formula into its components.  As we'll see, this formula is really a *recipe*, a series of steps to follow to get from a set of observations of a numerical variable:
+In the first part of this activity, we will break up this formula into its components.  As we'll see, this formula is really a *recipe*, a series of steps to follow to get from a set of observations of a numerical variable to a single number that summarizes the degree of variability among those observations:
 
 $$
 s = \overbrace{\sqrt{\underbrace{\frac{\overbrace{\sum_{i = 1}^n \underbrace{\left(\overbrace{x_i - \underbrace{\bar{x}}_{\text{1: Find the mean}}}^{\text{2: Find the deviations}} \right)^2}_{\text{3: Square the deviations}}}^{\text{4: Add up squared deviations}}}{n - 1}}_{\text{5: Divide by } n - 1 \text{ (variance)}}}}^{\text{6: Take the square root (standard deviation)}}
