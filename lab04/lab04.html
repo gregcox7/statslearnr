@@ -232,18 +232,25 @@ examine the distribution of lexical decision times.</p>
 <hr />
 <p><strong>Exercise 2</strong></p>
 <p>Fill in the blanks in the code below to make a histogram of lexical
-decision times across all words, using a binwidth of 20
-milliseconds.</p>
+decision times across all words, using a binwidth of 20 milliseconds.
+<em>Hint:</em> Remember that you will need</p>
+<ol style="list-style-type: decimal">
+<li>the name of the dataset;</li>
+<li>the name of the variable in that dataset that contains the lexical
+decision times;</li>
+<li>the name of the function we use to make a histogram; and</li>
+<li>to tell R the width of the bins we want to use.</li>
+</ol>
 <div class="tutorial-exercise" data-label="ldt_hist" data-completion="0"
 data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>___ %&gt;%
   ggplot(aes(x = ___)) +
-  ___(binwidth=20)</code></pre>
+  ___(binwidth = ___)</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
 <p>Describe the distribution of lexical decision times across words (you
-can re-run the code to look at other binwidths if you like). Be sure to
-note the number of modes, skewness, and whether there are any potential
+can re-run the code using other binwidths if you like). Be sure to note
+the number of modes, skewness, and whether there are any potential
 outliers.</p>
 <hr />
 </div>
@@ -339,16 +346,16 @@ first learns a word. This variable is labeled
 will follow the same steps we did for looking at the relationship
 between Length and LDT, but instead of Length as the explanatory
 variable, we will use “age of acquisition”.</p>
-<p>For the following exercises, be sure to refer to the code we used in
-the previous section.</p>
+<p>For the following exercises, be sure to refer to code we just used to
+look at word length and LDT.</p>
 <div id="section-scatterplot-1" class="section level3">
 <h3>Scatterplot</h3>
 <p>As before, let’s first make a scatterplot to visualize the
 relationship between LDT and age of acquisition.</p>
 <hr />
 <p><strong>Exercise 4</strong></p>
-<p>Fill in the blanks below to make a scatterplot with LDT as the
-response variable (on the <code>y</code> axis) and
+<p>Fill in the blanks below to make a scatterplot with <code>LDT</code>
+as the response variable (on the <code>y</code> axis) and
 <code>Age_Of_Acquisition</code> as the explanatory variable (on the
 <code>x</code> axis):</p>
 <div class="tutorial-exercise" data-label="ldt_aoa_scatter"
@@ -505,12 +512,12 @@ learnr:::store_exercise_cache(structure(list(label = "ldt_hist", global_setup = 
 ")", "gradethis_setup(", "    exercise.reveal_solution = FALSE", 
 ")", "", "anscombe <- read_csv(\"data/cor_data.csv\")", "elp <- read_csv(\"data/elp.csv\")"
 ), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
-    chunks = list(list(label = "ldt_hist", code = "___ %>%\n  ggplot(aes(x = ___)) +\n  ___(binwidth=20)", 
+    chunks = list(list(label = "ldt_hist", code = "___ %>%\n  ggplot(aes(x = ___)) +\n  ___(binwidth = ___)", 
         opts = list(label = "\"ldt_hist\"", exercise = "TRUE", 
             exercise.eval = "FALSE"), engine = "r")), code_check = NULL, 
     error_check = NULL, check = structure("grade_this_code()", chunk_opts = list(
         label = "ldt_hist-check")), solution = structure(c("elp %>%", 
-    "  ggplot(aes(x = LDT)) +", "  geom_histogram(binwidth=20)"
+    "  ggplot(aes(x = LDT)) +", "  geom_histogram(binwidth = 20)"
     ), chunk_opts = list(label = "ldt_hist-solution")), tests = NULL, 
     options = list(eval = FALSE, echo = TRUE, results = "markup", 
         tidy = FALSE, tidy.opts = NULL, collapse = FALSE, prompt = FALSE, 
@@ -532,7 +539,7 @@ learnr:::store_exercise_cache(structure(list(label = "ldt_hist", global_setup = 
         exercise.error.check.code = "gradethis_error_checker()", 
         exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
         label = "ldt_hist", exercise = TRUE, exercise.eval = FALSE, 
-        code = c("___ %>%", "  ggplot(aes(x = ___)) +", "  ___(binwidth=20)"
+        code = c("___ %>%", "  ggplot(aes(x = ___)) +", "  ___(binwidth = ___)"
         ), out.width.px = 624, out.height.px = 384, params.src = "ldt_hist, exercise = TRUE, exercise.eval = FALSE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r", 
     version = "3"), class = "tutorial_exercise"))

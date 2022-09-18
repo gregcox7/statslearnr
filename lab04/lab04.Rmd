@@ -189,7 +189,7 @@ Although it makes sense that a longer word would take longer to recognize, anoth
 
 The English Lexicon Project also records the mean "age of acquisition" for each word.  This is the mean age (in years) when someone first learns a word.  This variable is labeled `Age_Of_Acquisition` in the `elp` data.  Now, we will follow the same steps we did for looking at the relationship between Length and LDT, but instead of Length as the explanatory variable, we will use "age of acquisition".
 
-For the following exercises, be sure to refer to the code we used in the previous section.
+For the following exercises, be sure to refer to code we just used to look at word length and LDT.
 
 ### Scatterplot
 
@@ -199,7 +199,7 @@ As before, let's first make a scatterplot to visualize the relationship between 
 
 **Exercise 4**
 
-Fill in the blanks below to make a scatterplot with LDT as the response variable (on the `y` axis) and `Age_Of_Acquisition` as the explanatory variable (on the `x` axis):
+Fill in the blanks below to make a scatterplot with `LDT` as the response variable (on the `y` axis) and `Age_Of_Acquisition` as the explanatory variable (on the `x` axis):
 
 ```{r ldt_aoa_scatter, exercise = TRUE, exercise.eval=FALSE}
 ___ %>%
