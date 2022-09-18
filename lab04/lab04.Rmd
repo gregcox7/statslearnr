@@ -69,10 +69,10 @@ anscombe %>%
 
 **Exercise 1**
 
-For each of the scatterplots above, respond to the following questions:
+Based on the scatterplots above, respond to the following questions:
 
-a. Does the scatterplot indicate that there is probably an association between the two variables?  If so, describe the type of relationship.
-b. Does the correlation coefficient (`r`) provide a good summary of whether or how the two variables are related?  Why or why not?
+a. For each scatterplot, describe the relationship it seems to show between the two variables.
+b. For each scatterplot, say whether you think the correlation coefficient (`r`) provides a good summary of the relationship between the two variables and why.
 
 ---
 
@@ -179,7 +179,7 @@ The result of this line gives us the intercept of the best fitting line, as well
 
 **Exercise 3**
 
-Based on the result we got from running the code above, for each additional letter a word has, how much longer does it take to recognize that it is a word?
+According to the line of best fit we got from running the code above, for each additional letter a word has, how much longer does it take to recognize that it is a word?
 
 ---
 
@@ -191,45 +191,15 @@ The English Lexicon Project also records the mean "age of acquisition" for each 
 
 For the following exercises, be sure to refer to code we just used to look at word length and LDT.
 
-### Scatterplot
+### Scatterplot and overlaying the line of best fit
 
-As before, let's first make a scatterplot to visualize the relationship between LDT and age of acquisition.
+As before, let's make a scatterplot to visualize the relationship between LDT and age of acquisition.  We will also overlay the scatterplot with the line of best fit, like we did with word length.
 
 ---
 
 **Exercise 4**
 
-Fill in the blanks below to make a scatterplot with `LDT` as the response variable (on the `y` axis) and `Age_Of_Acquisition` as the explanatory variable (on the `x` axis):
-
-```{r ldt_aoa_scatter, exercise = TRUE, exercise.eval=FALSE}
-___ %>%
-  ggplot(aes(x = ___, y = ___)) +
-  ___()
-```
-
-```{r ldt_aoa_scatter-solution}
-elp %>%
-  ggplot(aes(x = Age_Of_Acquisition, y = LDT)) +
-  geom_point()
-```
-
-```{r ldt_aoa_scatter-check}
-grade_this_code()
-```
-
-How would you describe the relationship between LDT and age of acquisition?
-
----
-
-### Overlaying a line
-
-Now, let's add a line to the scatterplot.
-
----
-
-**Exercise 5**
-
-Fill in the blanks below to make a scatterplot with LDT as the response variable (on the `y` axis) and `Age_Of_Acquisition` as the explanatory variable (on the `x` axis) with the best-fitting line overlaid on top.
+Fill in the blanks below to make a scatterplot with `LDT` as the response variable (on the `y` axis) and `Age_Of_Acquisition` as the explanatory variable (on the `x` axis) with the best-fitting line on top:
 
 ```{r aoa_lm_plot, exercise = TRUE, exercise.eval=FALSE}
 ___ %>%
@@ -249,7 +219,8 @@ elp %>%
 grade_this_code()
 ```
 
-Does the line seem to be a good fit to the data?  Are there any areas where the line seems to under-shoot or over-shoot the data?
+a. How would you describe the strength and direction of the relationship between LDT and age of acquisition?
+b. Does the line seem to be a good fit to the data?  Are there any areas where the line seems to under-shoot or over-shoot the data?
 
 ---
 
