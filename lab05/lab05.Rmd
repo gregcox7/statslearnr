@@ -26,6 +26,11 @@ asc_choice <- read_csv("data/asc_choice_job.csv")
 
 set.seed(12222)
 
+kobe_simulated <- kobe %>%
+    specify(shot ~ prev_shot, success = "H") %>%
+    hypothesize(null = "independence") %>%
+    generate(reps = 1, type = "permute")
+
 asc_null_distribution <- asc_choice %>%
     specify(Choice ~ Group, success = "Consistent") %>%
     hypothesize(null = "independence") %>%
@@ -47,6 +52,14 @@ In this session, we will get some initial practice in testing hypotheses by rand
 
 In the first part, we will get a sense of how **permutation** works, and how it helps us to simulate what a sample might look like if the null hypothesis were true.  Permutation is one way that we can use "randomization" to test a null hypothesis.  In the second part, we will use permutation to test a more serious hypotheses about how different types of people might make decisions differently.
 
+Generally, hypothesis testing requires us to follow a set of steps that we can outline like this:
+
+1. Translate the research question into null and alternative hypotheses, framed in terms of population parameters
+2. Use the data from the sample to calculate summary statistics corresponding to those population parameters
+3. Model what those summary statistics *could have* been if the null hypothesis were true
+4. Find the $p$ value
+5. Form a conclusion
+
 ## Did Kobe have a hot hand?
 
 To get a handle on some of the big ideas in hypothesis testing in general, and of permutation in particular, let's first look at a very special dataset.  These data pertain to Kobe Bryant of the LA Lakers playing against the Orlando Magic in the 2009 NBA finals.  Commentators at the time remarked that Kobe seemed to have a "hot hand".  In other words, they were claiming that once Kobe made a basket, he was *more likely* to make a basket on his next shot.
@@ -65,33 +78,52 @@ We can translate the claim of the hot hand into a **null hypothesis** and an **a
 
 ### Summarize the data
 
-Now that we've framed our hypotheses, let's see whether our data suggest that we could reject the null hypothesis.  To begin, we will use a frequency table:
+Now that we've framed our hypotheses, let's see whether our data suggest that we could reject the null hypothesis.  We've already seen how to do this using a frequency table, like this:
 
 ```{r}
 kobe %>%
     group_by(prev_shot, shot) %>%
-    summarize(n=n()) %>%
+    summarize(n = n()) %>%
     mutate(p = n / sum(n))
 ```
 
 Here, `prev_shot` refers to whether Kobe's `prev`ious shot was a hit ("prev_H") or a miss ("prev_M").  The final column `p` gives us the proportions of Hits ("H") or Misses ("M") following either a Previous Hit or Previous Miss.
 
+We could use the proportions in the final column to calculate by hand the difference between the proportion of Kobe's made shots (`H`its) following either a hit (`prev_H`) or a miss (`prev_M`).  But we can use R to do this work for us using a chunk like this one:
+
+```{r}
+kobe %>%
+    specify(shot ~ prev_shot, success = "H") %>%
+    calculate(stat = "diff in props", order = c("prev_H", "prev_M"))
+```
+
+The chunk works like this:
+
+1. Tell R the name of the dataset we are working with (`kobe`).
+2. We `specify` which variable is the **explanatory variable** (`prev_shot`) and which variable is the **response variable** (`shot`).  We do this using the same squiggly thing we used for linear regression (`[response variable] ~ [explanatory variable]`).  Because the response variable is a binary (i.e., two-level) categorical variable, we also need to tell R that a "success" is a Hit (abbreviated "H").
+3. Tell R to `calculate` a particular summary `stat`istic.  By saying `stat = "diff in props"` we are telling R that we want to calculate a `diff`erence in `prop`ortion`s`.  Because we already told R that our response variable is `shot` and a success is a `H`it, R knows that we want to calculate a difference in the proportion of shots that were hits.  By saying `order = c("prev_H", "prev_M")`, we tell R that we want that difference calculated in a specific order.  In math shorthand, we could write it $\hat{p}_{\text{Prev. H}} - \hat{p}_{\text{Prev. M}}$.
+
+This may seem like a lot, but remember that computers needs to be told *everything* in detail.  We can't trust a computer to figure out anything on its own (yet?).  Moreover, we will see that these lines of code can be "remixed" in various ways that will be very convenient for us as we go.
+
 ---
 
 **Exercise 1**
 
-```{r kobe_calc, exercise = TRUE, exercise.eval = FALSE, exercise.lines = 1}
+a. The following chunk of code changes the `success` setting from `"H"` to `"M"`.  Describe the result this code gave us and *why*.
 
+```{r}
+kobe %>%
+    specify(shot ~ prev_shot, success = "M") %>%
+    calculate(stat = "diff in props", order = c("prev_H", "prev_M"))
 ```
 
-```{r kobe_calc-check}
-grade_result(
-  pass_if(~identical(round(.result, 2), round(18 / (18 + 32) - 25 / (25 + 36), 2)))
-)
-```
+b. The following chunk of code changes the `order` setting, but puts the `success` setting back to `"H"`.  Describe the result this code gave us and *why* (note that the reason is different from the one in part [a] of this exercise!).
 
-a. Based on the proportions in the table above, what is the difference between Kobe's proportion of *Hits following a Previous Hit* minus his proportion of *Hits following a Previous Miss*?  You can use the empty R box above to both calculate and check your answer.
-b. Given your answer in (a), could these data be consistent with Kobe having a "hot hand"?  Explain your reasoning.
+```{r}
+kobe %>%
+    specify(shot ~ prev_shot, success = "H") %>%
+    calculate(stat = "diff in props", order = c("prev_M", "prev_H"))
+```
 
 ---
 
@@ -101,7 +133,7 @@ If the null hypothesis were true, whether Kobe does or does not make a shot shou
 
 We can use R to permute Kobe's shot history and thereby model how Kobe's shots *might* have gone if the null hypothesis were true.  To do this, we need to `specify` the relevant variables as well as the `hypothesis`.  Let's see that all at once, then unpack it:
 
-```{r}
+```{r eval = FALSE}
 kobe_simulated <- kobe %>%
     specify(shot ~ prev_shot, success = "H") %>%
     hypothesize(null = "independence") %>%
@@ -110,48 +142,32 @@ kobe_simulated <- kobe %>%
 
 In the first line, the phrase `kobe_simulated <- ` tells R to store the result under the name `kobe_simulated`.
 
-In the second line, we `specify` which variable is the **explanatory variable** (`prev_shot`) and which variable is the **response variable** (`shot`).  We do this using the same squiggly thing we used for linear regression (`[response variable] ~ [explanatory variable]`).  Because the response variable is a binary (i.e., two-level) categorical variable, we also need to tell R that a "success" is a Hit (abbreviated "H").
+In the second line, we use that *same* `specify` line we already used.
 
 The third line is how we tell R what our null hypothesis is, namely, that the explanatory and response variables are **independent** (not associated).
 
-Finally, the fourth line `generate`s a simulated dataset by randomly permuting---that is, *shuffling*---the columns of the original data containing the explanatory and response variables.
+Finally, the fourth line `generate`s a simulated dataset by randomly `permut`ing---that is, *shuffling*---the columns of the original data containing the explanatory and response variables.  We'll see the function of the `reps = 1` setting momentarily.
 
 ---
 
 **Exercise 2**
 
-Find the same difference in proportions that you found in the previous exercise, but for the *simulated* data we just created.  Use the first code box below to create a summary table like the one we made for Kobe's actual data (again, you can check your work with "Submit Answer").  Use the second code box to calculate the difference in proportions (again, you can check your work with "Submit Answer").
+Find the difference in proportions ($\hat{p}_{\text{Prev. H}} - \hat{p}_{\text{Prev. M}}$) that you found in the previous exercise, but for the *simulated* data we just created.  *Hint:* you can copy-paste much of the previous code; only one line will be different!
 
-```{r kobe_sim_summary, exercise = TRUE, exercise.eval = FALSE, exercise.lines = 4}
+```{r kobe_sim_summary, exercise = TRUE, exercise.eval = FALSE, exercise.lines = 3}
+
+
 
 ```
 
 ```{r kobe_sim_summary-solution}
-# order 1 ----
 kobe_simulated %>%
-    group_by(prev_shot, shot) %>%
-    summarize(n=n()) %>%
-    mutate(p = n / sum(n))
-
-# order 2 ----
-kobe_simulated %>%
-    group_by(shot, prev_shot) %>%
-    summarize(n=n()) %>%
-    mutate(p = n / sum(n))
+    specify(shot ~ prev_shot, success = "H") %>%
+    calculate(stat = "diff in props", order = c("prev_H", "prev_M"))
 ```
 
 ```{r kobe_sim_summary-check}
 grade_this_code()
-```
-
-```{r kobe_sim_calc, exercise = TRUE, exercise.eval = FALSE, exercise.lines = 1}
-
-```
-
-```{r kobe_sim_calc-check}
-grade_result(
-  pass_if(~identical(round(.result, 2), round(kobe_simulated %>% specify(shot ~ prev_shot, success = "H") %>% calculate(stat = "diff in props", order = c("prev_H", "prev_M")) %>% pull(), 2)))
-)
 ```
 
 Compare the difference you just calculated (from simulated data) to the difference you calculated from the actual data in the previous exercise.  Do they seem similar or different?  Speculate about what this might tell us about whether the null hypothesis is true or not.
@@ -202,18 +218,6 @@ kobe_null_distribution %>%
     visualize()
 ```
 
----
-
-**Exercise 3**
-
-Describe the distribution of differences in proportions when the null hypothesis is true.
-
-a. How many modes does the distribution have, and does it seem to be skewed at all?
-b. Roughly where does the center of the distribution fall?
-c. Roughly where do the lower and upper ends of the distribution seem to fall?
-
----
-
 ### Find the $p$ value
 
 Remember that the $p$ value is the proportion of simulated datasets which are *at least as extreme* as our actual data.  In this case, that means the proportion of simulated datasets with a difference in proportions that is *bigger* than what we observed.  Let's tell R to remember that difference by running the chunk of code below:
@@ -247,7 +251,7 @@ Remember that we were testing the **null hypothesis** that Kobe did *not* have a
 
 ---
 
-**Exercise 4**
+**Exercise 3**
 
 Do you reject the null hypothesis?  Explain your reasoning.  What does your conclusion say about whether or not Kobe had a "hot hand"?
 
@@ -281,7 +285,7 @@ Our **research question** is, "is the proportion of consistent choices *higher* 
 
 ---
 
-**Exercise 5**
+**Exercise 4**
 
 What are the **null hypothesis** and **alternative hypothesis** that correspond to this research question?
 
@@ -293,39 +297,32 @@ The next step is to construct a frequency table so we can know what the proporti
 
 ---
 
-**Exercise 6**
+**Exercise 5**
 
-Find the proportions of consistent choices for each group, so we can find the difference between them (as usual, you can check your work using "Submit Answer").
+Find the difference in proportions of consistent choices between the autism spectrum group (ASC) and neuro-typical control group (NT).  For guidance, check out how we did it in the Kobe example above.  Be sure to note:
+
+* What is the name of the relevant dataset?
+* What are the names of the explanatory and response variables?
+* A "Consistent" choice counts as a "success".
+* For the difference in proportions, we want to look at ASC minus NT.
 
 ```{r asc_summary, exercise = TRUE, exercise.eval = FALSE}
 ___ %>%
-    group_by(___, ___) %>%
-    summarize(n = n()) %>%
-    mutate(p = n / sum(n))
+    specify(___ ~ ___, success = "___") %>%
+    calculate(stat = "___", order = c("___", "___"))
 ```
 
 ```{r asc_summary-solution}
 asc_choice %>%
-    group_by(Group, Choice) %>%
-    summarize(n = n()) %>%
-    mutate(p = n / sum(n))
+    specify(Choice ~ Group, success = "Consistent") %>%
+    calculate(stat = "diff in props", order = c("ASC", "NT"))
 ```
 
 ```{r asc_summary-check}
 grade_this_code()
 ```
 
-What is the difference in proportion of consistent choices between the autism spectrum group (ASC) and neuro-typical control group (NT)?  Is this difference more consistent with the null hypothesis or with the alternative hypothesis?  (You can use the box below to check your answer.)
-
-```{r asc_calc, exercise = TRUE, exercise.eval = FALSE, exercise.lines = 1}
-
-```
-
-```{r asc_calc-check}
-grade_result(
-  pass_if(~identical(round(.result, 2), round(asc_choice %>% specify(Choice ~ Group, success = "Consistent") %>% calculate(stat = "diff in props", order = c("ASC", "NT")) %>% pull(), 2)))
-)
-```
+Is the difference you found more consistent with the null hypothesis or with the alternative hypothesis?  Explain your reasoning.
 
 ---
 
@@ -335,9 +332,9 @@ If the null hypothesis were true, a participant's choice shouldn't depend on whi
 
 ---
 
-**Exercise 7**
+**Exercise 6**
 
-Fill in the blanks in the code below to simulate 1000 datasets assuming the null hypothesis were true, then produce a histogram (using the `visualize` function) of the resulting simulated differences in proportions.  For guidance, check out how we did it in the Kobe example above.  Be sure to note:
+Fill in the blanks in the code below to simulate 1000 datasets assuming the null hypothesis were true, then produce a histogram (using the `visualize` function) of the resulting simulated differences in proportions.  You'll re-use a lot from the last exercise!
 
 * What is the name of the relevant dataset?
 * What are the names of the explanatory and response variables?
@@ -382,7 +379,7 @@ To find the $p$ value, we first need to get the observed difference in proportio
 
 ---
 
-**Exercise 8**
+**Exercise 7**
 
 Fill in the blanks below to find the observed difference in proportions in the actual data and tell R to remember it under the label `asc_obs_diff`.  This value is then used to calculate the $p$ value.  *Hint 1:* for the `direction`, remember that this should correspond to the alternative hypothesis ("less", "greater", or "two-sided").  *Hint 2:* see what you wrote in the previous exercise, there's a lot you can reuse!
 
@@ -416,7 +413,7 @@ Finally, we are in a position to visualize where the observed difference in prop
 
 ---
 
-**Exercise 9**
+**Exercise 8**
 
 Fill in the blanks in the code below to visualize where the observed difference in proportions falls on the distribution of differences that would be expected if the null hypothesis were true (*hint:* look back at previous exercises, you'll be able to re-use a lot!)
 
@@ -436,7 +433,7 @@ asc_null_distribution %>%
 grade_this_code()
 ```
 
-Based on our analyses, would you reject the null hypothesis?  Explain your reasoning, being sure to choose a reasonable *significance level*.  What does your conclusion say about whether participants with a diagnosis of autism made more consistent choices than neuro-typical participants?
+Based on our analyses, would you reject the null hypothesis?  Explain your reasoning, being sure to state a reasonable *significance level*.  What does your conclusion say about whether participants with a diagnosis of autism made more consistent choices than neuro-typical participants?
 
 ---
 

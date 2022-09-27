@@ -1,0 +1,90 @@
+---
+title: "Lab 5: Hypothesis Testing Using Randomization"
+author: "YOUR NAME HERE"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+## Preliminaries
+
+### Load required packages
+
+Be sure that these packages are loaded from R's "library".
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(infer)
+```
+
+## Did Kobe have a hot hand?
+
+### Read in the data
+
+```{r load-kobe-data, message=FALSE}
+kobe <- read_csv("https://raw.githubusercontent.com/gregcox7/StatLabs/main/data/kobe.csv")
+```
+
+### Exercise 1
+
+```{r summarize-kobe-data}
+kobe %>%
+    group_by(prev_shot, shot) %>%
+    summarize(n = n()) %>%
+    mutate(p = n / sum(n))
+```
+
+YOUR RESPONSE HERE
+
+### Exercise 2
+
+Insert any text here.
+
+```{r trend-girls}
+# Insert code for Exercise 2 here
+```
+
+
+### Exercise 3
+
+Insert any text here.
+
+```{r plot-prop-boys-arbuthnot}
+# Insert code for Exercise 3 here
+```
+
+
+### Exercise 4
+
+Insert any text here.
+
+```{r dim-present}
+# Insert code for Exercise 4 here
+```
+
+
+### Exercise 5
+
+Insert any text here.
+
+```{r count-compare}
+# Insert code for Exercise 5 here
+```
+
+
+### Exercise 6
+
+Insert any text here.
+
+```{r plot-prop-boys-present}
+# Insert code for Exercise 6 here
+```
+
+
+### Exercise 7
+
+Insert any text here.
+
+```{r find-max-total}
+# Insert code for Exercise 7 here
+```
+
