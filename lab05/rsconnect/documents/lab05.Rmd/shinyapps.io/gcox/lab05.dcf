@@ -1,0 +1,13 @@
+name: lab05
+title: lab05
+username:
+account: gcox
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7130486
+bundleId: 6341535
+url: https://gcox.shinyapps.io/lab05/
+when: 1664251854.11768
+lastSyncTime: 1664251854.11773
+asMultiple: FALSE
+asStatic: FALSE

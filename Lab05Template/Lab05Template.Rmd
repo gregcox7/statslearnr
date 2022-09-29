@@ -7,84 +7,104 @@ output: pdf_document
 
 ## Preliminaries
 
+These chunks of code are needed to get the rest of the lab to work.  You can either run these chunks individually using the green arrow button for each chunk or you can use the "run all chunks above" button for later chunks.
+
 ### Load required packages
 
-Be sure that these packages are loaded from R's "library".
+This chunk loads "packages" from R's "library".  Packages provide functions that we need for analyzing data and making plots.
 
 ```{r load-packages, message=FALSE}
 library(tidyverse)
 library(infer)
 ```
 
-## Did Kobe have a hot hand?
+### Load required data
 
-### Read in the data
+This chunk loads the two datasets we need for this activity.
 
 ```{r load-kobe-data, message=FALSE}
 kobe <- read_csv("https://raw.githubusercontent.com/gregcox7/StatLabs/main/data/kobe.csv")
+asc_choice <- read_csv("https://raw.githubusercontent.com/gregcox7/StatLabs/main/data/asc_choice_job.csv")
 ```
 
-### Exercise 1
+## Exercises
 
-```{r summarize-kobe-data}
-kobe %>%
-    group_by(prev_shot, shot) %>%
-    summarize(n = n()) %>%
-    mutate(p = n / sum(n))
-```
 
-YOUR RESPONSE HERE
 
 ### Exercise 2
 
-Insert any text here.
+Modify the chunk of code below so that it gives us the difference in proportions for the *simulated* data we just created.
 
-```{r trend-girls}
-# Insert code for Exercise 2 here
+```{r kobe_sim_summary}
+kobe %>%
+    specify(shot ~ prev_shot, success = "H") %>%
+    calculate(stat = "diff in props", order = c("prev_H", "prev_M"))
 ```
 
-
-### Exercise 3
-
-Insert any text here.
-
-```{r plot-prop-boys-arbuthnot}
-# Insert code for Exercise 3 here
-```
-
-
-### Exercise 4
-
-Insert any text here.
-
-```{r dim-present}
-# Insert code for Exercise 4 here
-```
-
+In your own words, describe why the result we got with the simulated data is different from what we got with the actual data.
 
 ### Exercise 5
 
-Insert any text here.
+Find the difference in proportions of consistent choices between the autism spectrum group (ASC) and neuro-typical control group (NT).  For guidance, check out how we did it in the Kobe example above.  Be sure to note:
 
-```{r count-compare}
-# Insert code for Exercise 5 here
+* What is the name of the relevant dataset?
+* What are the names of the explanatory and response variables?
+* A "Consistent" choice counts as a "success".
+* For the difference in proportions, we want to look at ASC minus NT.
+
+```{r asc_summary}
+___ %>%
+    specify(___ ~ ___, success = "___") %>%
+    calculate(stat = "___", order = c("___", "___"))
 ```
-
 
 ### Exercise 6
 
-Insert any text here.
+Fill in the blanks in the code below to simulate 1000 datasets assuming the null hypothesis were true, then produce a histogram (using the `visualize` function) of the resulting simulated differences in proportions.  You'll re-use a lot from the last exercise!
 
-```{r plot-prop-boys-present}
-# Insert code for Exercise 6 here
+* What is the name of the relevant dataset?
+* What are the names of the explanatory and response variables?
+* A "Consistent" choice counts as a "success".
+* We want to do *1000* simulations.
+* For the difference in proportions, we want to look at ASC minus NT.
+
+```{r asc_null}
+asc_null_distribution <- ___ %>%
+    specify(___ ~ ___, success = "___") %>%
+    hypothesize(null = "___") %>%
+    generate(reps = ___, type = "permute") %>%
+    calculate(stat = "___", order = c("___", "___"))
+
+asc_null_distribution %>%
+    visualize()
 ```
 
+Once your code is working correctly, try running it a few times.
+
+a. Explain in your own words why the resulting distribution does not look the same each time.
+b. Based just on looking at the histogram (no need to do any calculations), describe what aspects of the distribution seem to stay the same and which seem to differ each time you run your code.  Note things like the shape of the distribution (number of modes and skewness), central tendency, and variability.
 
 ### Exercise 7
 
-Insert any text here.
+Fill in the blanks below to find the observed difference in proportions in the actual data and tell R to remember it under the label `asc_obs_diff`.  This value is then used to calculate the $p$ value.  *Hint 1:* for the `direction`, remember that this should correspond to the alternative hypothesis ("less", "greater", or "two-sided").  *Hint 2:* see what you wrote in the previous exercise, there's a lot you can reuse!
 
-```{r find-max-total}
-# Insert code for Exercise 7 here
+```{r asc_obs_calc}
+asc_obs_diff <- ___ %>%
+    specify(___ ~ ___, success = "___") %>%
+    calculate(stat = "___", order = c("___", "___"))
+
+asc_null_distribution %>%
+    get_p_value(obs_stat = asc_obs_diff, direction = "___")
 ```
 
+### Exercise 8
+
+Fill in the blanks in the code below to visualize where the observed difference in proportions falls on the distribution of differences that would be expected if the null hypothesis were true (*hint:* look back at previous exercises, you'll be able to re-use a lot!)
+
+```{r asc_null_vis}
+___ %>%
+    visualize() +
+    shade_p_value(obs_stat = ___, direction = "___")
+```
+
+Based on our analyses, would you reject the null hypothesis?  Explain your reasoning, being sure to state a reasonable *significance level*.  What does your conclusion say about whether participants with a diagnosis of autism made more consistent choices than neuro-typical participants?

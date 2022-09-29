@@ -152,12 +152,12 @@ Finally, the fourth line `generate`s a simulated dataset by randomly `permut`ing
 
 **Exercise 2**
 
-Find the difference in proportions ($\hat{p}_{\text{Prev. H}} - \hat{p}_{\text{Prev. M}}$) that you found in the previous exercise, but for the *simulated* data we just created.  *Hint:* you can copy-paste much of the previous code; only one line will be different!
+Modify the chunk of code below so that it gives us the difference in proportions for the *simulated* data we just created.
 
 ```{r kobe_sim_summary, exercise = TRUE, exercise.eval = FALSE, exercise.lines = 3}
-
-
-
+kobe %>%
+    specify(shot ~ prev_shot, success = "H") %>%
+    calculate(stat = "diff in props", order = c("prev_H", "prev_M"))
 ```
 
 ```{r kobe_sim_summary-solution}
@@ -170,7 +170,7 @@ kobe_simulated %>%
 grade_this_code()
 ```
 
-Compare the difference you just calculated (from simulated data) to the difference you calculated from the actual data in the previous exercise.  Do they seem similar or different?  Speculate about what this might tell us about whether the null hypothesis is true or not.
+In your own words, describe why the result we got with the simulated data is different from what we got with the actual data.
 
 ---
 
@@ -368,7 +368,9 @@ asc_null_distribution %>%
 grade_this_code()
 ```
 
-Once your code is working correctly, try clicking "Run Code" or "Submit Answer" a few times.  a. Explain in your own words why the resulting distribution does not look the same each time.
+Once your code is working correctly, try running it a few times.
+
+a. Explain in your own words why the resulting distribution does not look the same each time.
 b. Based just on looking at the histogram (no need to do any calculations), describe what aspects of the distribution seem to stay the same and which seem to differ each time you run your code.  Note things like the shape of the distribution (number of modes and skewness), central tendency, and variability.
 
 ---

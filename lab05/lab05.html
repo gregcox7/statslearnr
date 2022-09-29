@@ -301,21 +301,18 @@ variables. We’ll see the function of the <code>reps = 1</code> setting
 momentarily.</p>
 <hr />
 <p><strong>Exercise 2</strong></p>
-<p>Find the difference in proportions (<span
-class="math inline">\(\hat{p}_{\text{Prev. H}} - \hat{p}_{\text{Prev.
-M}}\)</span>) that you found in the previous exercise, but for the
-<em>simulated</em> data we just created. <em>Hint:</em> you can
-copy-paste much of the previous code; only one line will be
-different!</p>
+<p>Modify the chunk of code below so that it gives us the difference in
+proportions for the <em>simulated</em> data we just created.</p>
 <div class="tutorial-exercise" data-label="kobe_sim_summary"
 data-completion="0" data-diagnostics="1" data-startover="1"
 data-lines="3">
+<pre class="text"><code>kobe %&gt;%
+    specify(shot ~ prev_shot, success = &quot;H&quot;) %&gt;%
+    calculate(stat = &quot;diff in props&quot;, order = c(&quot;prev_H&quot;, &quot;prev_M&quot;))</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
-<p>Compare the difference you just calculated (from simulated data) to
-the difference you calculated from the actual data in the previous
-exercise. Do they seem similar or different? Speculate about what this
-might tell us about whether the null hypothesis is true or not.</p>
+<p>In your own words, describe why the result we got with the simulated
+data is different from what we got with the actual data.</p>
 <hr />
 </div>
 <div
@@ -546,14 +543,16 @@ asc_null_distribution %&gt;%
     visualize()</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
-<p>Once your code is working correctly, try clicking “Run Code” or
-“Submit Answer” a few times. a. Explain in your own words why the
-resulting distribution does not look the same each time. b. Based just
-on looking at the histogram (no need to do any calculations), describe
-what aspects of the distribution seem to stay the same and which seem to
-differ each time you run your code. Note things like the shape of the
-distribution (number of modes and skewness), central tendency, and
-variability.</p>
+<p>Once your code is working correctly, try running it a few times.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Explain in your own words why the resulting distribution does not
+look the same each time.</li>
+<li>Based just on looking at the histogram (no need to do any
+calculations), describe what aspects of the distribution seem to stay
+the same and which seem to differ each time you run your code. Note
+things like the shape of the distribution (number of modes and
+skewness), central tendency, and variability.</li>
+</ol>
 <hr />
 </div>
 <div id="section-find-the-p-value-1" class="section level3">
@@ -700,7 +699,7 @@ learnr:::store_exercise_cache(structure(list(label = "kobe_sim_summary", global_
 "", "asc_obs_diff <- asc_choice %>%", "    specify(Choice ~ Group, success = \"Consistent\") %>%", 
 "    calculate(stat = \"diff in props\", order = c(\"ASC\", \"NT\"))"
 ), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
-    chunks = list(list(label = "kobe_sim_summary", code = "\n\n", 
+    chunks = list(list(label = "kobe_sim_summary", code = "kobe %>%\n    specify(shot ~ prev_shot, success = \"H\") %>%\n    calculate(stat = \"diff in props\", order = c(\"prev_H\", \"prev_M\"))", 
         opts = list(label = "\"kobe_sim_summary\"", exercise = "TRUE", 
             exercise.eval = "FALSE", exercise.lines = "3"), engine = "r")), 
     code_check = NULL, error_check = NULL, check = structure("grade_this_code()", chunk_opts = list(
@@ -727,9 +726,10 @@ learnr:::store_exercise_cache(structure(list(label = "kobe_sim_summary", global_
         exercise.error.check.code = "gradethis_error_checker()", 
         exercise.completion = FALSE, exercise.reveal_solution = FALSE, 
         label = "kobe_sim_summary", exercise = TRUE, exercise.eval = FALSE, 
-        exercise.lines = 3, code = c("", "", ""), out.width.px = 624, 
-        out.height.px = 384, params.src = "kobe_sim_summary, exercise = TRUE, exercise.eval = FALSE, exercise.lines = 3", 
-        fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
+        exercise.lines = 3, code = c("kobe %>%", "    specify(shot ~ prev_shot, success = \"H\") %>%", 
+        "    calculate(stat = \"diff in props\", order = c(\"prev_H\", \"prev_M\"))"
+        ), out.width.px = 624, out.height.px = 384, params.src = "kobe_sim_summary, exercise = TRUE, exercise.eval = FALSE, exercise.lines = 3", 
+        fig.num = 0, exercise.df_print = "paged"), engine = "r", 
     version = "3"), class = "tutorial_exercise"))
 </script>
  
